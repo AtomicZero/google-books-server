@@ -57,11 +57,11 @@ const saveBookInDb = async (req, res) => {
 const removeBookInDb = async (req, res) => {
   try {
     const { id } = req.params;
-
     await db.Book.findByIdAndDelete(id);
-
+    const results = await db.Book.find({});
     res.json({
       success: true,
+      results,
     });
   } catch (error) {
     res.status(500).json({
